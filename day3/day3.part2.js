@@ -20,7 +20,6 @@ function findMostCommonBinary(arr) {
 			oneCount++;
 		}
 	}
-	console.log(zeroCount, oneCount);
 	return zeroCount > oneCount ? "0" : "1";
 }
 function findLeastCommonBinary(arr) {
@@ -33,7 +32,6 @@ function findLeastCommonBinary(arr) {
 			oneCount++;
 		}
 	}
-	console.log(zeroCount, oneCount);
 	if (zeroCount === oneCount) {
 		return "0"
 	}
@@ -57,7 +55,6 @@ function processInput() {
 	while (true) {
 		let commonBitArray = findCommonBit(array, pos);
 		let commonBit = findMostCommonBinary(commonBitArray);
-		console.log(commonBit);
 		array = array.filter(v => v[pos] === commonBit);
 		pos++;
 		if (typeof array[1] === "undefined") {
@@ -71,9 +68,7 @@ function processInput() {
 		let commonBitArray = findCommonBit(array, pos);
 		let commonBit = findLeastCommonBinary(commonBitArray);
 
-		console.log(commonBit + "!");
 		array = array.filter(v => v[pos] === commonBit);
-		console.log(array.length);
 		pos++;
 		if (typeof array[1] === "undefined") {
 			break;
@@ -84,5 +79,6 @@ function processInput() {
 	// not 2388407
 	console.log(parseInt(Number(oxygenRating), 2) * parseInt(Number(co2Rating), 2));
 }
-
+console.time('processInput');
 processInput();
+console.timeEnd('processInput');
