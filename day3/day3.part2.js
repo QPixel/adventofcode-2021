@@ -10,8 +10,8 @@ function loadInput() {
 	return result;
 }
 
-function findMostCommonBinary(arr) {
-	let zeroCount = 0;
+function findCommonBinary(arr, type) {
+	let zeroCount = 0; 
 	let oneCount = 0;
 	for (let i = 0; i < arr.length; i++) {
 		if (arr[i] === "0") {
@@ -20,22 +20,11 @@ function findMostCommonBinary(arr) {
 			oneCount++;
 		}
 	}
-	return zeroCount > oneCount ? "0" : "1";
-}
-function findLeastCommonBinary(arr) {
-	let zeroCount = 0;
-	let oneCount = 0;
-	for (let i = 0; i < arr.length; i++) {
-		if (arr[i] === "0") {
-			zeroCount++
-		} else {
-			oneCount++;
-		}
-	}
-	if (zeroCount === oneCount) {
-		return "0"
-	}
-	return zeroCount < oneCount ? "0" : "1";
+	if (type === 0) {
+		return zeroCount > oneCount ? "0" : "1"
+	} else {
+		return zeroCount <= oneCount ? "0" : "1" 
+	} 
 }
 
 function findCommonBit(data, pos) {
@@ -53,8 +42,9 @@ function processInput() {
 	let pos = 0;
 	let array = data;
 	while (true) {
+		// O(N)
 		let commonBitArray = findCommonBit(array, pos);
-		let commonBit = findMostCommonBinary(commonBitArray);
+		let commonBit = findCommonBinary(commonBitArray, 0);
 		array = array.filter(v => v[pos] === commonBit);
 		pos++;
 		if (typeof array[1] === "undefined") {
@@ -66,7 +56,7 @@ function processInput() {
 	pos = 0;
 	while (true) {
 		let commonBitArray = findCommonBit(array, pos);
-		let commonBit = findLeastCommonBinary(commonBitArray);
+		let commonBit = findCommonBinary(commonBitArray, 1);
 
 		array = array.filter(v => v[pos] === commonBit);
 		pos++;
@@ -79,6 +69,7 @@ function processInput() {
 	// not 2388407
 	console.log(parseInt(Number(oxygenRating), 2) * parseInt(Number(co2Rating), 2));
 }
+
 console.time('processInput');
 processInput();
 console.timeEnd('processInput');
